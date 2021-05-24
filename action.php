@@ -1002,40 +1002,39 @@ if(isset($_POST["approveApplication"])){
 //**/
 
 
-if (isset($_POST["saveAdmin"])){
-    $fname = $_POST["firstname"];
-    $lname = $_POST["lastname"];
-    $username = $_POST["username"];
+if (isset($_POST["saverepo"])){
+    $reponame = $_POST["reponame"];
+    $desc = $_POST["desc"];
+    
     $accessLevel= $_POST["accesslevel"];
-    $gender= $_POST["gender"];
-    $nrc = $_POST["nrc"];
-    $address = $_POST["address"];
-    $email = $_POST["email"];
-    $phone= $_POST["phone"];
+  
     try{
-        if (empty($fname) ||empty($lname) || empty($username) || empty($gender)|| empty($phone) || empty($address)||empty($email)) {
+        if (empty($reponame)) {
             $output .= "<div class='alert alert-warning'>
-           <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>Dont leave the form blank</b>
+           <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>Dont leave repository Name  blank</b>
         </div>";
         }else{
-            $sql = "INSERT INTO admin VALUES(?,?,?,?,?,?,?,?,?,?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(1,NULL,PDO::PARAM_INT);
-            $stmt->bindValue(2,$lname,PDO::PARAM_STR);
-            $stmt->bindValue(3,$fname,PDO::PARAM_STR);
-            $stmt->bindValue(4,$username,PDO::PARAM_STR);
-            $stmt->bindValue(5,$gender,PDO::PARAM_STR);
-            $stmt->bindValue(6,$nrc,PDO::PARAM_STR);
-            $stmt->bindValue(7,$accessLevel,PDO::PARAM_STR);
-            $stmt->bindValue(8,$address,PDO::PARAM_STR);
-            $stmt->bindValue(9,$email,PDO::PARAM_STR);
-            $stmt->bindValue(10,$phone,PDO::PARAM_STR);
-            $stmt->bindValue(11,"0",PDO::PARAM_STR);
-
-            if ($stmt->execute()){
-                $output .= "<div class='alert alert-success'>
-           <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>Successfully Added</b>
-        </div>";
+            // Check if the repo exist
+            $valid = "SELECT*FROM repository WHERE reponame=?";
+            $stm = $conn->prepare($valid);
+            $stm->bindValue(1,$reponame,PDO::PARAM_STR);
+            $stm->execute();
+            if($stm->rowCount() > 0){
+                $output .= "<div class='alert alert-danger'>
+                <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>Repository Already Exist</b>
+             </div>";
+            }else{
+                $sql = "INSERT INTO repository VALUES(?,?,?,?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(1,NULL,PDO::PARAM_INT);
+                $stmt->bindValue(2,$reponame,PDO::PARAM_STR);
+                $stmt->bindValue(3,$desc,PDO::PARAM_STR);
+                $stmt->bindValue(4,$accessLevel,PDO::PARAM_STR);
+                if ($stmt->execute()){
+                    $output .= "<div class='alert alert-success'>
+               <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>Successfully Added</b>
+            </div>";
+                }
             }
         }
 
@@ -1044,6 +1043,25 @@ if (isset($_POST["saveAdmin"])){
            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'></a><b>" . $e->getMessage() . "</b>
         </div>";
     }
+}
+
+if(isset($_POST["repositoryView"])){
+           $valid = "SELECT*FROM repository";
+            $stm = $conn->prepare($valid);
+            $stm->execute();
+            if($stm->rowCount() > 0){
+                while ($row = $stm->fetch(PDO::FETCH_OBJ)) {
+                    $output .="
+                  <tr>
+                     <td>".$row->rid."</td>
+                     <td><a href='detail.php?repid=".$row->rid."'>".$row->reponame."</a></td>
+                     <td>".$row->description."</td>
+                     <td>".$row->accessLevel."</td>
+                
+                  </tr>
+                ";
+                }
+            }
 }
 
 //fetch Admin

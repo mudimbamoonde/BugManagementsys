@@ -538,40 +538,32 @@ $("document").ready(function () {
     /**
      * Danger zone Adminstrator at work
      * */
-    $("#saveAdmin").click(function (event) {
+    $("#saverepo").click(function (event) {
         event.preventDefault();
-        var firstname = $("#fname").val();
-        var lastname = $("#lname").val();
-        var  username= $("#username").val();
-        var  accesslevel= $("#role").val();
-        var  gender= $("#gender").val();
-        var  nrc1= $("#nrc1").val();
-        var  nrc2= $("#nrc2").val();
-        var  phyaddress= $("#phyaddress").val();
-        var  email= $("#email").val();
-        var  phone= $("#phone").val();
-        var nrc = nrc1+"/"+ nrc2+"/" + 1;
+        var reponame = $("#rname").val();
+        var desc = $("#desc").val();
+        var accesslevel= $("#role").val();
+
        // alert(nrc);
         $.ajax({
             url:"action.php",
             method:"POST",
-            data:{saveAdmin:1,firstname:firstname,lastname:lastname,username:username,
-                gender:gender,nrc:nrc,address:phyaddress,
-                email:email,phone:phone,accesslevel:accesslevel},
+            data:{saverepo:1,reponame:reponame,desc:desc,accesslevel:accesslevel},
             success:function (data) {
                 $("#adminMessage").html(data);
             }
         });
     });
 
-    ManageAdmin();
-    function ManageAdmin() {
+    repositoryView();
+    function repositoryView() {
         $.ajax({
             url:"action.php",
             method:"POST",
-            data:{fetchAdmin:1},
+            data:{repositoryView:1},
             success:function (data) {
-                $("#ManageAdmin").html(data);
+                
+                $("#repositoryView").html(data);
             }
         });
     }

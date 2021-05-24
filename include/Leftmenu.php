@@ -1,3 +1,6 @@
+<?php 
+require_once "config.php";
+?>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item nav-profile">
@@ -25,17 +28,17 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#paymnents" aria-expanded="false"
                 aria-controls="paymnents">
-                <i class="menu-icon mdi mdi-currency-usd"></i>
+                <i class="menu-icon mdi mdi-file"></i>
                 <span class="menu-title">Repository</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="paymnents">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="pending_payments.php">Create Repository</a>
+                        <a class="nav-link" href="create_repository.php">Create Repository</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="balance.php">Manage Repository</a>
+                        <a class="nav-link" href="manage_repository.php">Manage Repository</a>
                     </li>
                 </ul>
             </div>
