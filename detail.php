@@ -123,35 +123,48 @@ include "include/head.php";
         <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper">
-                <div class="row purchace-popup">
-
-                </div>
-
 
                 <div class="row">
-                    <div class="col-12 grid-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="col-12 grid-margin">
+                    <div class="col-10 grid-margin">
                                     <div class="card">
                                         <div class="card-body">
-                                        <?php 
-                                         $sql = "SELECT*FROM repository WHERE rid=?";
-                                         $stmt = $conn->prepare($sql);
-                                         $stmt->bindValue(1,$_GET["repid"]);
-                                         $stmt->execute();
-                                         $row = $stmt->fetch(PDO::FETCH_OBJ);                                        
-                                        ?>
-                                            <div class="card-title"><h2><?php echo $row->reponame ?></h2></div>
+                                            <?php 
+                                                $sql = "SELECT*FROM repository WHERE rid=?";
+                                                $stmt = $conn->prepare($sql);
+                                                $stmt->bindValue(1,$_GET["repid"]);
+                                                $stmt->execute();
+                                                $row = $stmt->fetch(PDO::FETCH_OBJ);                                        
+                                            ?>
+                                            <div class="card-title text-danger"><h2><?php echo $row->reponame ?></h2></div>
                                             <hr>
-                                            
-                        
+                                            <?php if(isset($_GET["repid"]) && isset($_GET["state"])){?>
+                                                <?php if($_GET["state"] =="issues"){ ?>
+
+                                                <p> <h1>Welcome to issues!</h1><br>
+                                Issues are used to track todos, bugs, feature requests, and more. As issues are created, they’ll appear here in a 
+                                searchable and filterable list. 
+                                To get started, you should create an issue.</p>
+
+                                                <?php }?>
+                                                 
+                                                <?php } ?>
+                                        
                                         </div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                       
                     </div>
+
+                    <!-- col 2 -->
+                    <div class="col-2 grid-margin">
+                        <ul class="list-group">
+                            <li class="list-group-item active" aria-current="true">Quick Link</li>
+                            <li class="list-group-item"><a href="?repid=<?php echo $row->rid ?>&state=issues">Issues</a></li>
+                            <li class="list-group-item"><a href="">Actions</a></li>
+                            <li class="list-group-item"><a href="">Security</a></li>
+                            <li class="list-group-item"><a href="">Tester</a></li>
+                        </ul>
+                    </div>
+                    <!-- col2 end -->
                 </div>
             </div>
         </div>

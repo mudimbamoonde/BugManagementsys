@@ -16,8 +16,13 @@ require_once "config.php";
                             <span class="status-indicator online"></span>
                         </div>
                     </div>
+                    
                 </div>
+                <a href="../create_repository.php" class="btn btn-success btn-block">New Project
+                <i class="mdi mdi-plus"></i>
+                </a>
             </div>
+            
         </li>
         <li class="nav-item">
             <a class="nav-link" href="index.php">
