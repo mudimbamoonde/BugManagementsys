@@ -136,16 +136,67 @@ include "include/head.php";
                                                 $row = $stmt->fetch(PDO::FETCH_OBJ);                                        
                                             ?>
                                             <div class="card-title text-danger"><h2><?php echo $row->reponame ?></h2></div>
+                                        
                                             <hr>
                                             <?php if(isset($_GET["repid"]) && isset($_GET["state"])){?>
                                                 <?php if($_GET["state"] =="issues"){ ?>
+                                                 
+                                                    <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                Add Issue +
+                                                </button>
+                                                    <br>
+                                                    <br>
+                                                    <ul class="list-group">
+                                                    <?php
+                                                        $chek = $conn->prepare("
+                                                        SELECT *FROM issues WHERE rid=?
+                                                        ");
+                                                        $chek->bindValue(1,$_GET["repid"]);
+                                                        $chek->execute();
+                                                        if ($chek->rowCount() > 0) {
+                                                            while ($ro = $chek->fetch(PDO::FETCH_OBJ)) {
+                                                                ?>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <?php if ($ro->status == "active") { ?>
+                                                   <b><?php echo $ro->issueName ?>  <span class="badge badge-warning"><?php echo $ro->status ?></span></b> <br>
+                                                   <?php
+                                                   } else {
+                                                       ?>
+
+                                                    <b><?php echo $ro->issueName ?>  <span class="badge badge-success"><?php echo $ro->status ?></span></b>
+                                                   <?php
+                                                   }
+                                                            ?>
+                                                
+                                                   <span class="btn btn-sm btn-danger">x</span>
+                                                </li>
+                                               
+                                
+                                                            <?php
+                                                            }
+
+                                                        }else{
+                                                            ?>
 
                                                 <p> <h1>Welcome to issues!</h1><br>
-                                Issues are used to track todos, bugs, feature requests, and more. As issues are created, they’ll appear here in a 
-                                searchable and filterable list. 
-                                To get started, you should create an issue.</p>
+                                                Issues are used to track todos, bugs, feature requests, and more.
+                                                As issues are created, they’ll appear here in a 
+                                                searchable and filterable list. 
+                                                To get started, you should create an issue.</p>
 
+                                                    <?php } ?>
+                                                    </ul>
                                                 <?php }?>
+
+
+
+                                                <?php if($_GET["state"] =="task"){ ?>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalTask">Assign Task +</button>
+
+                                                <?php } ?>
+
+
                                                  
                                                 <?php } ?>
                                         
@@ -159,12 +210,105 @@ include "include/head.php";
                         <ul class="list-group">
                             <li class="list-group-item active" aria-current="true">Quick Link</li>
                             <li class="list-group-item"><a href="?repid=<?php echo $row->rid ?>&state=issues">Issues</a></li>
-                            <li class="list-group-item"><a href="">Actions</a></li>
-                            <li class="list-group-item"><a href="">Security</a></li>
-                            <li class="list-group-item"><a href="">Tester</a></li>
+                            <li class="list-group-item"><a href="?repid=<?php echo $row->rid ?>&state=task">Assign Task</a></li>
+                         
                         </ul>
                     </div>
                     <!-- col2 end -->
+                    <!-- Modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Create Issue</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <div id="msg"></div>
+                        <form>
+                          <div class="row">
+                              <div class="col-md-8">
+                                 <label for="issuename">Issue Name</label>
+                                 <input type="hidden" name="rid" id="rid" value="<?php echo $_GET["repid"] ?>" class="form-control">
+                                 <input type="text" name="issuename" id="issuename" class="form-control">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-8">
+                                 <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option selected disabled>SELECT STATUS</option>
+                                    <option value="active">Active</option>
+                                    <option value="resolved">Resolved</option>
+                                </select>
+                              </div>
+                          </div>
+                      
+                    </div>
+                    <div class="modal-footer pull-left">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="saveIssues" class="btn btn-primary">Save Issue</button>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                <!-- End modal -->
+
+
+                <!-- Assign Task -->
+                <div class="modal fade" id="exampleModalTask" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Assign Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <div id="msg"></div>
+                        <form>
+                          <div class="row">
+                              <div class="col-md-8">
+                                 <label for="issuename">Issue Name</label>
+                                 <input type="hidden" name="rid" id="rid" value="<?php echo $_GET["repid"] ?>" class="form-control">
+                                 <select name="issuename" id="issuename" class="form-control">
+                                    <option selected disabled>SELECT ISSUE</option>
+                                 <?php 
+                                 
+                                 $chek2 = $conn->prepare("SELECT*FROM issues WHERE rid=? AND status='active'");
+                                 $chek2->bindValue(1,$_GET["repid"]);
+                                 $chek2->execute();
+                                 if ($chek2->rowCount() > 0) {
+                                     while ($rowx = $chek2->fetch(PDO::FETCH_OBJ)) {
+                                         echo "<option>$rowx->issueName</option>";
+                                        }
+                                     }    
+                                         ?> 
+                                </select>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-8">
+                                 <label for="desc">Description</label>
+                                <textarea id="desc" name="desc" class="form-control"></textarea>
+                              </div>
+                          </div>
+                      
+                    </div>
+                    <div class="modal-footer pull-left">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="assignIssue" class="btn btn-primary">Assign Issue</button>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                <!-- End Task -->
                 </div>
             </div>
         </div>

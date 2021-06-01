@@ -725,6 +725,37 @@ function approvepaymenttudents() {
         });
     }
 
+    // saveIssues
+    $("#saveIssues").click(function(event){
+        const issuename = $("#issuename").val();
+        const status = $("#status").val();
+        const rid = $("#rid").val();
+        $.ajax({
+            url:"action.php",
+            method:"POST",
+            data:{saveIs:1,issuename:issuename,status:status,rid:rid},
+            success:function(data){
+                $("#msg").html(data);
+            }
+        });
+    });
+
+
+    // assignedissues
+    $("#assignIssue").click(function(event){
+        const issuename = $("#issuename").val();
+        const desc = $("#desc").val();
+        const rid = $("#rid").val();
+        $.ajax({
+            url:"action.php",
+            method:"POST",
+            data:{saveIs:1,issuename:issuename,desc:desc,rid:rid},
+            success:function(data){
+                $("#msg").html(data);
+            }
+        });
+    });
+
 
     //End of Body
 });

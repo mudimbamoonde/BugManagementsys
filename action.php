@@ -1642,28 +1642,30 @@ try{
 
 }
 
-//examStudentRegistration
+//saveIs:1,issuename:issuename,status:status
+if(isset($_POST["saveIs"])){
+    $issuename = $_POST["issuename"];
+    $status = $_POST["status"];
+    $rid = $_POST["rid"];
 
-if (isset($_POST["examStudent"])){
-    /**examID	student_ID	CourseCode	examCentre	ReferenceNum
-     */
-    $sql  = "SELECT*FROM examregister";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-
-    if ($stmt->rowCount() > 0){
-
-        while($row = $stmt->fetch(PDO::FETCH_OBJ)){
-            $output .="
-            <tr>
-                <td>#</td>
-                <td>$row->ReferenceNum</td>
-                <td>$row->student_ID</td>
-                <td><a href='#' class='btn btn-warning'>Print</a> </td>
-            </tr>";
+    if(empty($issuename) && empty($status)){
+         $output .="Dont Leave Empty";    
+    }else{
+        $sql = "INSERT INTO issues (issueID,issueName,status,rid) VALUE(?,?,?,?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindvalue(1,null);
+        $stmt->bindvalue(2,$issuename);
+        $stmt->bindvalue(3,$status);
+        $stmt->bindvalue(4,$rid);
+        if($stmt->execute()){
+            $output .="<div class='alert alert-success'>
+            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'>&times;</a><b>Logged!!</b>
+         </div>";
+        }else{
+            $output .="<div class='alert alert-success'>
+            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'>&times;</a><b>Logged!!</b>
+         </div>";
         }
-
-
     }
 }
 
