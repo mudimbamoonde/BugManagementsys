@@ -1,4 +1,4 @@
-s<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <?php
 
@@ -129,11 +129,7 @@ include "include/head.php";
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="row purchace-popup">
-
                 </div>
-
-                <?php include "include/widgets.php";?>
-
                 <div class="row">
                     <div class="col-12 grid-margin">
                         <div class="card">
@@ -174,15 +170,9 @@ include "include/head.php";
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <!--                                                            CourseName 	CourseCode 	year 	semester -->
-                                                            <label class="col-sm-3 col-form-label">Gender:</label>
+                                                            <label class="col-sm-3 col-form-label">Email:</label>
                                                             <div class="col-sm-9">
-                                                                <select name="gender" id="gender" class="form-control" style="border: groove">
-                                                                    <option selected>SELECT GENDER</option>
-                                                                    <option>Male</option>
-                                                                    <option>Female</option>
-                                                                    <option>Other</option>
-                                                                </select>
+                                                                <input type="text" id="email" name="email" style="border: groove" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -196,14 +186,11 @@ include "include/head.php";
                                                             <div class="col-sm-9">
                                                                 <select  id="role" name="role" style="border: groove" class="form-control">
                                                                     <option selected>SELECT ROLE</option>
-                                                                    <?php
-                                                                    require_once 'include/config.php';
-                                                                    $check = $conn->prepare("select*from access_level");
-                                                                    $check->execute();
-                                                                    while ($row = $check->fetch(PDO::FETCH_OBJ)){
-                                                                        echo "<option >$row->Role</option>";
-                                                                    }
-                                                                    ?>
+                                                                    <option>Developer</option>
+                                                                    <option>tester</option>
+                                                                    <option>admin</option>
+                                                                    <option>both</option>
+                                                                    <!-- 'developer','tester','admin','both' -->
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -213,51 +200,27 @@ include "include/head.php";
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Email:</label>
+                                                            <label class="col-sm-3 col-form-label">Password:</label>
                                                             <div class="col-sm-9">
-                                                                <input type="email" class="form-control"  style="border: groove" name="email" id="email">
+                                                                <input type="password" id="pword" name="pword" style="border: groove" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label for="phyaddress" class="col-sm-3 col-form-label">Physical Address:</label>
+                                                            <label class="col-sm-3 col-form-label">Confirm Password:</label>
                                                             <div class="col-sm-9">
-                                                                <textarea name="phyaddress" style="border: groove" class="form-control" id="phyaddress"></textarea>
+                                                                <input type="password" id="conpass" name="conpass" style="border: groove" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">National ID:</label>
-                                                            <div class="col-sm-3">
-                                                                <input type="text" name="nrc1" maxlength="6" id="nrc1" class="form-control" style="border: groove">
-                                                            </div>/
-                                                            <div class="col-sm-2">
-                                                                <input type="text" name="nrc2" maxlength="2" id="nrc2" class="form-control" style="border: groove">
-                                                            </div>/
-                                                            <div class="col-sm-2">
-                                                                <input type="text" disabled value="1" class="form-control" style="border: groove">
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <!--                                                            CourseName 	CourseCode 	year 	semester -->
-                                                            <label class="col-sm-3 col-form-label">Phone:</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="tel" id="phone" maxlength="9" name="phone" style="border: groove" class="form-control" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <a href="#" id="saveAdmin" class="btn btn-success">Save</a>
+                                                        <!-- <a href="#" id="saveUser" class="btn btn-lg btn-success">Save</a> -->
+                                                        <a href="#" id="createAccount" class="btn btn-lg btn-primary">Create Account</a>
                                                     </div>
                                                 </div>
                                             </form>

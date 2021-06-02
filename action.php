@@ -622,130 +622,68 @@ if (isset($_POST["BulkcourseAssign"])){
     }
 
 }
-/**Student Management section*/
-if(isset($_POST["addStudent"])){
-    /*
-     * addStudent:1,firstname:firstname,lastname:lastname,othername:othername,
-                dateofbirth:dateofbirth,gender:gender,nrc:nrc,programStudy:program_study,address:phyaddress,
-                studymode:modeofstudy, email:email,phone:phone*/
-
+/**Admin Management section*/
+if(isset($_POST["saveAccount"])){
+    // const firstname = $("#fname").val();
+    //     const lastname = $("#lname").val();
+    //     const username = $("#username")
+    //     const pword = $("#pword")
+    //     const conpass = $("#conpass")
+    //     const  email= $("#email").val();
+    //     const  role = $("#role").val();
+    // saveAdmin:1,firstname:firstname,lastname:lastname,username:username,
+    // email:email,role:role,pword:pword,conpass:conpass
 
     $fname = $_POST["firstname"];
     $lname = $_POST["lastname"];
-    $othername = $_POST["othername"];
-    $dateofbirth = $_POST["dateofbirth"];
-    $gender= $_POST["gender"];
-    $nrc = $_POST["nrc"];
-    $programStudy = $_POST["programStudy"];
-    $address = $_POST["address"];
-    $studymode = $_POST["studymode"];
+    $username = $_POST["username"];
     $email = $_POST["email"];
-    $phone= $_POST["phone"];
+    $role = $_POST["role"];
+    $pword = $_POST["pword"];
+    $conpass = $_POST["conpass"];
 
-    @$age = date("Y") - $dateofbirth;
-    //st_id  firstname   lastname    othername   dob     nrc     age  gender program     doe     address     modeofstudy     email   phone   status
     try{
 
-
-        //Program
-        $sqli = "SELECT * FROM program WHERE shortname='$programStudy'";
+      if(!empty($fname) && !empty($lname) && !empty($username) && !empty($email)){
+        //password Validation
+        if ($pword == $conpass) {
+        //userValidation
+        $sqli = "SELECT * FROM users WHERE email=?";
         $th = $conn->prepare($sqli);
+        $th->bindValue(1,$email);
         $th->execute();
-        $fth = $th->fetch(PDO::FETCH_OBJ);
-        $programCode = $fth->shortname;
-        $programName = $fth->programName;
-
-
-
-        //
-        $sql = "INSERT INTO student1 VALUES(?,?,?,?,?,?,?,?,?,?,NOW(),?,?,?,?,?)";
+        if($th->rowCount() > 0){
+            $output .= "<div class='alert alert-danger'>
+            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>User Already Exist</b>
+         </div>";
+        }else{
+        $sql = "INSERT INTO users VALUES(?,?,?,?,?,?,?)";
         $stmt= $conn->prepare($sql);
         $stmt->bindValue(1,NULL,PDO::PARAM_INT);
         $stmt->bindValue(2,$fname,PDO::PARAM_STR);
         $stmt->bindValue(3,$lname,PDO::PARAM_STR);
-        $stmt->bindValue(4,$othername,PDO::PARAM_STR);
-        $stmt->bindValue(5,$dateofbirth);
-        $stmt->bindValue(6,$nrc,PDO::PARAM_STR);
-        $stmt->bindValue(7,$age,PDO::PARAM_INT);
-        $stmt->bindValue(8,$gender,PDO::PARAM_STR);
-        $stmt->bindValue(9,$programName,PDO::PARAM_STR);
-        $stmt->bindValue(10,$programCode,PDO::PARAM_STR);
-        //$stmt->bindValue(10,"NOW()");
-        $stmt->bindValue(11,$address,PDO::PARAM_STR);
-        $stmt->bindValue(12,$studymode,PDO::PARAM_STR);
-        $stmt->bindValue(13,$email,PDO::PARAM_STR);
-        $stmt->bindValue(14,$phone,PDO::PARAM_INT);
-        $stmt->bindValue(15,"0",PDO::PARAM_STR);
+        $stmt->bindValue(4,$username,PDO::PARAM_STR);
+        $stmt->bindValue(5,$email);
+        $stmt->bindValue(6,$role,PDO::PARAM_STR);
+        $stmt->bindValue(7,$role,PDO::PARAM_STR);
+    
         if ($stmt->execute()) {
             $output .= "<div class='alert alert-success'>
            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>Successfully Submitted</b>
 
         </div>";
         }
-
-    }catch (Exception $e){
-        $output .= "<div class='alert alert-warning'>
-           <a href='#' class='close' data-dismiss ='alert' aria-label ='close'>&times;</a>$programStudy-><b>" . $e->getMessage() . "</b>
-        </div>";
     }
-
-
+}else{
+    $output .= "<div class='alert alert-warning'>
+    <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>Password Doesn't Match</b>
+ </div>";
 }
-//edit student
-if(isset($_POST["EditStudent"])){
-    /*
-     * addStudent:1,firstname:firstname,lastname:lastname,othername:othername,
-                dateofbirth:dateofbirth,gender:gender,nrc:nrc,programStudy:program_study,address:phyaddress,
-                studymode:modeofstudy, email:email,phone:phone*/
-
-
-    $fname = $_POST["firstname"];
-    $lname = $_POST["lastname"];
-    $othername = $_POST["othername"];
-    $dateofbirth = $_POST["dateofbirth"];
-    $gender= $_POST["gender"];
-    $nrc = $_POST["nrc"];
-    $programStudy = $_POST["programStudy"];
-    $address = $_POST["address"];
-    $studymode = $_POST["studymode"];
-    $email = $_POST["email"];
-    $phone= $_POST["phone"];
-    $internalID= $_POST["internalID"];
-    $programCode= $_POST["programCode"];
-
-    @$age = date("Y") - $dateofbirth;
-    //st_id  firstname   lastname    othername   dob     nrc     age  gender program     doe     address     modeofstudy     email   phone   status
-    try{
-
-
-
-
-        $sql = "UPDATE student1 SET firstname= ?,lastname= ?,othername= ?,
-                            dob= ?, nrc =?,age =?, gender = ?,
-                            program = ?,programCode=?,address =?,modeofstudy=?,
-                            email = ?,phone = ? WHERE st_id=?";
-        $stmt= $conn->prepare($sql);
-        $stmt->bindValue(1,$fname,PDO::PARAM_STR);
-        $stmt->bindValue(2,$lname,PDO::PARAM_STR);
-        $stmt->bindValue(3,$othername,PDO::PARAM_STR);
-        $stmt->bindValue(4,$dateofbirth);
-        $stmt->bindValue(5,$nrc,PDO::PARAM_STR);
-        $stmt->bindValue(6,$age,PDO::PARAM_INT);
-        $stmt->bindValue(7,$gender,PDO::PARAM_STR);
-        $stmt->bindValue(8,$programStudy,PDO::PARAM_STR);
-        $stmt->bindValue(9,$programCode,PDO::PARAM_STR);
-        //$stmt->bindValue(10,"NOW()");
-        $stmt->bindValue(10,$address,PDO::PARAM_STR);
-        $stmt->bindValue(11,$studymode,PDO::PARAM_STR);
-        $stmt->bindValue(12,$email,PDO::PARAM_STR);
-        $stmt->bindValue(13,$phone,PDO::PARAM_INT);
-        $stmt->bindValue(14,$internalID,PDO::PARAM_INT);
-        if ($stmt->execute()) {
-            $output .= "<div class='alert alert-success'>
-           <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>Successfully Edited</b>
-
-        </div>";
-        }
+      }else{
+        $output .= "<div class='alert alert-warning'>
+        <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>Dont Leave Blank</b>
+     </div>";
+      }
 
     }catch (Exception $e){
         $output .= "<div class='alert alert-warning'>
@@ -755,6 +693,7 @@ if(isset($_POST["EditStudent"])){
 
 
 }
+
 
 
 ///
@@ -1645,25 +1584,66 @@ try{
 //saveIs:1,issuename:issuename,status:status
 if(isset($_POST["saveIs"])){
     $issuename = $_POST["issuename"];
-    $status = $_POST["status"];
+    // $desc = $_POST["desc"];
     $rid = $_POST["rid"];
 
-    if(empty($issuename) && empty($status)){
+    if(empty($issuename) && empty($desc)){
          $output .="Dont Leave Empty";    
     }else{
-        $sql = "INSERT INTO issues (issueID,issueName,status,rid) VALUE(?,?,?,?)";
+        $sql = "INSERT INTO issues (issueID,issueName,rid) VALUE(?,?,?)";
         $stmt = $conn->prepare($sql);
         $stmt->bindvalue(1,null);
         $stmt->bindvalue(2,$issuename);
-        $stmt->bindvalue(3,$status);
-        $stmt->bindvalue(4,$rid);
+        // $stmt->bindvalue(3,$desc);
+        $stmt->bindvalue(3,$rid);
         if($stmt->execute()){
             $output .="<div class='alert alert-success'>
-            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'>&times;</a><b>Logged!!</b>
+            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'>&times;</a><b>Logged !!</b>
          </div>";
         }else{
+            $output .="<div class='alert alert-danger'>
+            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'>&times;</a><b>Not Logged!!</b>
+         </div>";
+        }
+    }
+}
+
+if(isset($_POST["assignIssue"])){
+    $issueID = $_POST["issueID"];
+    $desc = $_POST["desc"];
+    $userID = $_POST["userID"];
+
+    if(empty($issueID) && empty($desc)){
+         $output .="Dont Leave Empty";    
+
+    }else{
+
+        $ue  = $conn->prepare("SELECT*FROM users WHERE userID=?");
+        $ue->bindvalue(1,$userID);
+        $ue->execute();
+        $p = $ue->fetch(PDO::FETCH_OBJ);
+
+        $uex  = $conn->prepare("SELECT*FROM issues WHERE issueID=?");
+        $uex->bindvalue(1,$issueID);
+        $uex->execute();
+        $px = $uex->fetch(PDO::FETCH_OBJ);
+
+
+
+        $sql = "INSERT INTO assignedissues (assignedID,description,issueID,userID) VALUE(?,?,?,?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindvalue(1,null);
+        $stmt->bindvalue(2,$desc);
+        $stmt->bindvalue(3,$issueID);
+        $stmt->bindvalue(4,$userID);
+        if($stmt->execute()){
             $output .="<div class='alert alert-success'>
-            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'>&times;</a><b>Logged!!</b>
+            <b>$px->issueName</b>
+            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'>&times;</a><b>Assigned to $p->firstName $p->lastName!!</b>
+         </div>";
+        }else{
+            $output .="<div class='alert alert-danger'>
+            <a href='#' class='close' data-dismiss ='alert' aria-label ='close'>&times;</a><b>Failed to Assign!!</b>
          </div>";
         }
     }

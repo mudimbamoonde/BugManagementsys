@@ -50,21 +50,21 @@ require_once "config.php";
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#m_user" aria-expanded="false" aria-controls="cid">
+            <a class="nav-link" data-toggle="collapse" href="#cid" aria-expanded="false" aria-controls="cid">
                 <i class="menu-icon mdi mdi-account"></i>
                 <span class="menu-title" title="Continous Integration / Development">CI/CD</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="m_user">
+            <div class="collapse" id="cid">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="add_user.php">Deploy</a>
+                        <a class="nav-link" href="">Deploy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="manage_user.php">Reverse</a>
+                        <a class="nav-link" href="">Reverse</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="activate_student.php">Manage Version</a>
+                        <a class="nav-link" href="">Manage Version</a>
                     </li>
                 </ul>
             </div>

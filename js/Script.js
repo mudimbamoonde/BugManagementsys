@@ -368,68 +368,31 @@ $("document").ready(function () {
     });
 
     /**
-     * Student management section*/
-    $("#saveStudent").click(function (event) {
+     * Admin management section*/
+    $("#createAccount").click(function (event) {
         event.preventDefault();
-        var firstname = $("#fname").val();
-        var lastname = $("#lname").val();
-        var  othername= $("#oname").val();
-        var  dateofbirth= $("#dob").val();
-        var  gender= $("#gender").val();
-        var  nrc1= $("#nrc1").val();
-        var  nrc2= $("#nrc2").val();
-        var  program_study= $("#program_study").val();
-        var  phyaddress= $("#phyaddress").val();
-        var  modeofstudy= $("#modeofstudy").val();
-        var  email= $("#email").val();
-        var  phone= $("#phone").val();
-        var nrc = nrc1+"/"+ nrc2+"/" + 1;
-       //alert(modeofstudy);
+        const firstname = $("#fname").val();
+        const lastname = $("#lname").val();
+        const username = $("#username").val();
+        const pword = $("#pword").val();
+        const conpass = $("#conpass").val();
+        const  email= $("#email").val();
+        const  role = $("#role").val();
+    //    alert(role)
         $.ajax({
             url:"action.php",
             method:"POST",
-            data:{addStudent:1,firstname:firstname,lastname:lastname,othername:othername,
-                dateofbirth:dateofbirth,gender:gender,nrc:nrc,programStudy:program_study,address:phyaddress,
-                studymode:modeofstudy, email:email,phone:phone},
+            data:{saveAccount:1,firstname:firstname,lastname:lastname,username:username,
+                pword:pword,conpass:conpass,email:email,role:role},
             success:function (data) {
-                $("#StudentMessage").html(data);
-                countStudent();
+                $("#adminMessage").html(data);
+                // console.log(data);
             }
+           
         });
 
     });
-    //Edit student
-    $("#editStudent").click(function (event) {
-        event.preventDefault();
-        var firstname = $("#fname").val();
-        var lastname = $("#lname").val();
-        var  othername= $("#oname").val();
-        var  dateofbirth= $("#dob").val();
-        var  gender= $("#gender").val();
-        var  nrc1= $("#nrc1").val();
-        var  nrc2= $("#nrc2").val();
-        var  program_study= $("#program_study").val();
-        var  phyaddress= $("#phyaddress").val();
-        var  modeofstudy= $("#modeofstudy").val();
-        var  email= $("#email").val();
-        var  phone= $("#phone").val();
-        var  programCode= $("#programCode").val();
-        var  internalID= $("#internalID").val();
-        var nrc = nrc1+"/"+ nrc2+"/" + 1;
-       // alert(programCode);
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{EditStudent:1,firstname:firstname,lastname:lastname,othername:othername,
-                dateofbirth:dateofbirth,gender:gender,nrc:nrc,programStudy:program_study,address:phyaddress,
-                studymode:modeofstudy, email:email,phone:phone,programCode:programCode,internalID:internalID},
-            success:function (data) {
-                $("#StudentMessage").html(data);
-                countStudent();
-            }
-        });
-
-    });
+  
 
     //*
     // Search students**/
@@ -743,15 +706,18 @@ function approvepaymenttudents() {
 
     // assignedissues
     $("#assignIssue").click(function(event){
-        const issuename = $("#issuename").val();
+        event.preventDefault();
+        const issueID = $("#issueID").val();
         const desc = $("#desc").val();
-        const rid = $("#rid").val();
+        const userID = $("#userID").val();
+        // alert(issueID);
         $.ajax({
             url:"action.php",
             method:"POST",
-            data:{saveIs:1,issuename:issuename,desc:desc,rid:rid},
+            data:{assignIssue:1,issueID:issueID,userID:userID,desc:desc},
             success:function(data){
-                $("#msg").html(data);
+                $("#msg2").html(data);
+                // alert(data);
             }
         });
     });
