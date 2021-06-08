@@ -657,6 +657,8 @@ if(isset($_POST["saveAccount"])){
             <a href='#' class='close' data-dismiss ='alert' aria-label ='close'><span class='mdi mdi-close'></span></a><b>User Already Exist</b>
          </div>";
         }else{
+            $hashedpassword = md5($pword);
+
         $sql = "INSERT INTO users VALUES(?,?,?,?,?,?,?)";
         $stmt= $conn->prepare($sql);
         $stmt->bindValue(1,NULL,PDO::PARAM_INT);
@@ -665,7 +667,7 @@ if(isset($_POST["saveAccount"])){
         $stmt->bindValue(4,$username,PDO::PARAM_STR);
         $stmt->bindValue(5,$email);
         $stmt->bindValue(6,$role,PDO::PARAM_STR);
-        $stmt->bindValue(7,$role,PDO::PARAM_STR);
+        $stmt->bindValue(7,$hashedpassword,PDO::PARAM_STR);
     
         if ($stmt->execute()) {
             $output .= "<div class='alert alert-success'>
@@ -1003,11 +1005,30 @@ if(isset($_POST["repositoryView"])){
             }
 }
 
+if(isset($_POST["assignTask"])){
+           $valid = "SELECT*FROM repository";
+            $stm = $conn->prepare($valid);
+            $stm->execute();
+            if($stm->rowCount() > 0){
+                while ($row = $stm->fetch(PDO::FETCH_OBJ)) {
+                    $output .="
+                  <tr>
+                     <td>".$row->rid."</td>
+                     <td><a href='detail.php?repid=".$row->rid."&state=task'>".$row->reponame."</a></td>
+                    
+                     <td>".$row->accessLevel."</td>
+                
+                  </tr>
+                ";
+                }
+            }
+}
+
 //fetch Admin
 if (isset($_POST["fetchAdmin"])){
 
     try{
-        $sql = "SELECT*FROM admin";
+        $sql = "SELECT*FROM users";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
@@ -1016,24 +1037,13 @@ if (isset($_POST["fetchAdmin"])){
             while ($row = $stmt->fetch(PDO::FETCH_OBJ)){
                 //First Name 	Last Name 	username 	Email 	access Level 	Status 	Action
 //              	user_id	firstname	lastname	username	gender	accessLevel	address	email	phone	status
-$n++;
-                $id = $row->user_id;
-                $fname = $row->firstname;
-                $lname = $row->lastname;
+                $n++;
+                $id = $row->userID;
+                $fname = $row->firstName;
+                $lname = $row->lastName;
                 $username = $row->username;
-                $gender = $row->gender;
                 $accessLevel = $row->accessLevel;
                 $email = $row->email;
-                $address = $row->address;
-                $phone = $row->phone;
-                $status = $row->status;
-                $snrc = $row->nrc;
-
-                if ($status=="0"){
-                    $vti = "<label class='btn btn-danger btn-rounded btn-sm'>InActive</label>";
-                }else{
-                    $vti = "<label class='btn btn-success btn-rounded btn-sm'>Active</label>";
-                }
             $output .=" <tr>
                         <td>$n</td>
                         <td>$fname</td>
@@ -1041,8 +1051,8 @@ $n++;
                         <td>$username</td>
                         <td>$email</td>
                         <td>$accessLevel</td>
-                        <td>$vti</td>
-                        <td><a href='#' user_id='$id' accessLevel='$accessLevel' username='$username' nrc='$snrc' name='$fname $lname' email='$email' id='createAccountAdmin' class='btn btn-warning'>Create Account</a> | <a href='#'  class='btn btn-danger'>
+              
+                        <td><a href='#' id='createAccountAdmin' class='btn btn-warning'>Edit</a> | <a href='#'  class='btn btn-danger'>
                         <span class='mdi mdi-delete-circle'></span></a> </td>
                     </tr> ";
 

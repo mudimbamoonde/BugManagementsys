@@ -1,18 +1,18 @@
 <?php 
 require_once "config.php";
 ?>
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar sidebar-offcanvas sidebar-fixed-top sidebar" id="sidebar">
     <ul class="nav">
         <li class="nav-item nav-profile">
             <div class="nav-link">
                 <div class="user-wrapper">
-                    <div class="profile-image">
+                    <!-- <div class="profile-image">
                         <img src="images/faces/face1.jpg" alt="profile image">
-                    </div>
+                    </div> -->
                     <div class="text-wrapper">
-                        <p class="profile-name">Mudimba Moonde</p>
+                        <p class="profile-name"><?php echo $_SESSION["fname"] ." ". $_SESSION["lname"] ?></p>
                         <div>
-                            <small class="designation text-muted">System Engineer</small>
+                            <small class="designation text-muted text-capitalize"><?php echo $_SESSION["role"] ?></small>
                             <span class="status-indicator online"></span>
                         </div>
                     </div>
@@ -48,7 +48,7 @@ require_once "config.php";
                 </ul>
             </div>
         </li>
-
+<!-- 
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#cid" aria-expanded="false" aria-controls="cid">
                 <i class="menu-icon mdi mdi-account"></i>
@@ -68,7 +68,7 @@ require_once "config.php";
                     </li>
                 </ul>
             </div>
-        </li>
+        </li> -->
 
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#m_user" aria-expanded="false" aria-controls="m_user">
@@ -85,7 +85,7 @@ require_once "config.php";
                         <a class="nav-link" href="manage_user.php">Manage User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="activate_student.php">Assign Task</a>
+                        <a class="nav-link" href="assignTask.php">Assign Task</a>
                     </li>
                 </ul>
             </div>

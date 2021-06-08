@@ -16,9 +16,9 @@
     <link rel="shortcut icon" href="images/favicon.png" />
 
 </head>
-
-<style type="text/css">
-    body{
-        font-size: 50px;
-    }
-</style>
+<?php 
+ session_start();
+ if(!isset($_SESSION["email"])){
+    exit(header("Location:logout.php"));
+}
+?>

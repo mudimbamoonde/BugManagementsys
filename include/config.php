@@ -3,10 +3,10 @@ $host = 'localhost';
 $db_name = 'bugmon';
 $username = 'root';
 $password = '';
-
 $data = array();
 try{
     $conn = new PDO('mysql:host='.$host.';dbname='.$db_name, $username,$password);
+   
     $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     if ($conn){
         //->

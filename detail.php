@@ -250,7 +250,7 @@ include "include/head.php";
 
 <div class="my-3 p-3 bg-body rounded shadow-sm">
   <h2 class="border-bottom pb-2 mb-0">Issues</h2>
-  <span class="border-bottom pb-2 mb-0">Issues Log on the System</span>
+  <!-- <span class="border-bottom pb-2 mb-0">Issues Log on the System</span> -->
   <?php 
       $sqlq = "SELECT*FROM issues WHERE rid=?";
       $stmtq = $conn->prepare($sqlq);
@@ -274,7 +274,7 @@ include "include/head.php";
 
 
 <div class="my-3 p-3 bg-body rounded shadow-sm">
-  <h6 class="border-bottom pb-2 mb-0">Assiged Issues</h6>
+  <h2 class="border-bottom pb-2 mb-0">Assiged Issues</h2>
 
   <?php 
       $sqlw = "SELECT *FROM assignedissues AS ai INNER JOIN issues AS iss ON iss.issueID = ai.issueID  
@@ -289,10 +289,11 @@ include "include/head.php";
 
     <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
       <div class="d-flex justify-content-between">
-        <strong class="text-gray-dark"><?php echo $roww->issueName ?></strong>
-        <a href="#"><?php echo $roww->description; ?></a>
+        <strong class="text-dark"><?php echo $roww->issueName ?></strong>
       </div>
-      <span class="d-block"><?php echo $roww->firstName ." ".$roww->lastName ?></span>
+      <span class="d-block">@<?php echo $roww->firstName ." ".$roww->lastName ?></span>
+      <br>
+      <p class="text-dark"><?php echo $roww->description; ?></p>
     </div>
   </div>
 
@@ -303,11 +304,11 @@ include "include/head.php";
 </div>
 </main>
 
-                                                <?php } ?>
+            <?php } ?>
 
 
-            
-                                        
+
+    
                                         </div>
                             </div>
                        

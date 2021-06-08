@@ -3,7 +3,7 @@ CREATE TABLE repository(
     reponame varchar(100) not null,
     description text,
     accessLevel varchar(100) not null
-)
+);
 
 CREATE TABLE issues(
     issueID int(10) not null primary key auto_increment,

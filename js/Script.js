@@ -18,20 +18,7 @@ $("document").ready(function () {
             }
         });
     });
-    //fetch school
-    fetchSchool();
-    function fetchSchool() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{fetchSchool:1},
-            success:function (data) {
-                $("#fetchSchool").html(data);
-
-            }
-        });
-
-    }
+  
 
     //deleteSchool
     $("body").delegate("#delSchool","click",function (event) {
@@ -51,6 +38,7 @@ $("document").ready(function () {
         });
 
     });
+
     //deleteSchool
     $("body").delegate("#saveEditSchool","click",function (event) {
        event.preventDefault();
@@ -71,34 +59,7 @@ $("document").ready(function () {
         });
 
      });
-//count schools
-    countSchools();
-    function countSchools() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{countSchool:1},
-            success:function (data) {
-                $("#countPrograms").html(data);
-                fetchSchool();
-            }
 
-        });
-    }
-
-    //Programs configuration
-    //view program
-    sch();
-    function sch() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{schools:1},
-            success:function (data) {
-                $("#schools").html(data);
-            }
-        });
-    }
 
     //send values
     $("#saveProgram").click(function (event) {
@@ -120,18 +81,7 @@ $("document").ready(function () {
        });
     });
 
-    //fetchProgram
-    fetchProgram();
-    function fetchProgram() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{fetchProgram:1},
-            success:function (data) {
-                $("#fetchProgram").html(data);
-            }
-        });
-    }
+    
     //delete Program
     $("body").delegate("#delProgram","click",function (event) {
         event.preventDefault();
@@ -153,18 +103,7 @@ $("document").ready(function () {
     });
 
 
-    //fetchSemester
-    fetchSemester();
-    function fetchSemester() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{fetchSemester:1},
-            success:function (data) {
-                $("#fetchSemester").html(data);
-            }
-        });
-    }
+  
 
     //save Semester
     $("#saveSemester").click(function (event) {
@@ -182,18 +121,7 @@ $("document").ready(function () {
         });
     });
 
-    //Course
-    fetchSes();
-    function fetchSes() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{fetchSes:1},
-            success:function (data) {
-                $("#semesters").html(data);
-            }
-        });
-    }
+
 
     //save Course
     $("#saveCourse").click(function (event) {
@@ -214,60 +142,10 @@ $("document").ready(function () {
             }
         });
     });
-//fetchCourse
-    fetchCourse();
-    function fetchCourse() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{fetchCourse:1},
-            success:function (data) {
-                $("#fetchCourse").html(data);
 
-            }
-        });
 
-    }
 
-    //Countcourses
-    Countcourses();
-    function Countcourses() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{Countcourses:1},
-            success:function (data) {
-                $("#Countcourses").html(data);
-                fetchCourse();
-            }
-            //Countcourses
-        });
-    }
-    //Assign Single Course to a program
-    prgromHint();
-    function prgromHint() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{prgromHint:1},
-            success:function (data) {
-                $("#prgromHint").html(data);
-            }
-        });
-    }
 
-    //programsDisplay
-    programsDisplay();
-    function programsDisplay() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{programsDisplay:1},
-            success:function (data) {
-                $("#programsDisplay").html(data);
-            }
-        });
-    }
     //get Program
     $("body").delegate("#assignCourseID","click",function (event) {
         var programName =$(this).attr("programName");
@@ -289,19 +167,7 @@ $("document").ready(function () {
         });
     });
 
-    //Bulk Assign
-    bulkCourse();
-    function bulkCourse() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{BulkCourse:1},
-            success:function (data) {
-                $("#BulkCourses").html(data);
 
-            }
-        });
-    }
     //bulk
     $("body").delegate("#saveCourses","click",function (event) {
 
@@ -335,19 +201,6 @@ $("document").ready(function () {
         }
     });
 
-    //Program
-    bulkP();
-    function bulkP() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{Bulkp:1},
-            success:function (data) {
-                $("#selectTerm").html(data);
-
-            }
-        });
-    }
 
     //saveAssign single Program Assign
     $("#saveAssign").click(function (event) {
@@ -397,57 +250,6 @@ $("document").ready(function () {
     //*
     // Search students**/
     //onkeyup="showstudent(this.value)
-
-
-    /**/
-    //countStudents
-    countStudent();
-    function countStudent() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{countStudents:1},
-            success:function (data) {
-                $("#countStudent").html(data);
-            }
-        });
-    }
-
-    countUsers();
-    function countUsers() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{countUsers:1},
-            success:function(data) {
-                $("#countUsers").html(data);
-            }
-        });
-    }
-
-    fetchStudent();
-    function fetchStudent() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{fetchStudent:1},
-            success:function (data) {
-                $("#timelineStudents").html(data);
-            }
-        });
-    }
-    //ManageStudents
-    ManageStudents();
-    function ManageStudents() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{ManageStudents:1},
-            success:function (data) {
-                $("#ManageStudents").html(data);
-            }
-        });
-    }
 
     //approve application
     $("body").delegate("#approve","click",function (event) {
@@ -518,30 +320,6 @@ $("document").ready(function () {
         });
     });
 
-    repositoryView();
-    function repositoryView() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{repositoryView:1},
-            success:function (data) {
-                
-                $("#repositoryView").html(data);
-            }
-        });
-    }
-//actvatestudents
-    actvatestudents();
-    function actvatestudents() {
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{actvatestudents:1},
-            success:function (data) {
-                $("#actvatestudents").html(data);
-            }
-        });
-    }
 //create Account
 
     $("body").delegate("#createAccounts","click",function(event) {
@@ -599,44 +377,10 @@ $("document").ready(function () {
         });
     }
 
-    ///*****/
-    // assignSemester
-    $("#assignSemester").click(function (event){
-        event.preventDefault();
 
-        var studentID =$("#sin").val();
-        var semesterID = $("#semester_id").val();
-        //alert(semesterID);
-        $.ajax({
-            url:"action.php",
-            method:"POST",
-            data:{assignSemester:1,studentID:studentID,semesterID:semesterID},
-            success:function (data) {
-                $("#assignMessage").html(data);
-            }
-        });
-    });
 
-    //assignCo
 
-/**
- *
- * PAYMENTS MANAGEMENT
- * */
 
-viewPayment();
-function viewPayment() {
-    //  id 	student_id 	semester_id 	paid 	paymentType 	paymentimg
-    // 	BatchNumber 	Narration 	due 	balance 	date_updated
-    $.ajax({
-        url:"action.php",
-        method:"POST",
-        data:{viewPayments:1},
-        success:function (data) {
-            $("#Paymenttudents").html(data);
-        }
-    });
-}
     approvepaymenttudents();
 function approvepaymenttudents() {
     //  id 	student_id 	semester_id 	paid 	paymentType 	paymentimg
@@ -674,16 +418,40 @@ function approvepaymenttudents() {
 
     });
 
-//Exam
-    ///Exametudents
-    Exametudents();
-    function Exametudents() {
+    repositoryView();
+    function repositoryView() {
+    
         $.ajax({
             url:"action.php",
             method:"POST",
-            data:{examStudent:1},
+            data:{repositoryView:1},
             success:function (data) {
-                $("#Exametudents").html(data);
+                $("#repositoryView").html(data);
+            }
+        });
+    }
+    fetchAdmin();
+    function fetchAdmin() {
+    
+        $.ajax({
+            url:"action.php",
+            method:"POST",
+            data:{fetchAdmin:1},
+            success:function (data) {
+                $("#ManageAdmin").html(data);
+            }
+        });
+    }
+
+    assignTask();
+    function assignTask() {
+    
+        $.ajax({
+            url:"action.php",
+            method:"POST",
+            data:{assignTask:1},
+            success:function (data) {
+                $("#assignTask").html(data);
             }
         });
     }

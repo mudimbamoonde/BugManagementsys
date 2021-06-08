@@ -4,125 +4,16 @@
 <?php
 
 include "include/head.php";
+
 ?>
 
 <body style="font-size: 15px">
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-        <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-            <a class="navbar-brand brand-logo bg-success" href="index.php">
-                <!--          <img src="images/logo.svg" alt="logo" />-->
-               Bug Tracking System
-            </a>
-            <a class="navbar-brand brand-logo-mini" href="index.php">
-                <!--          <img src="images/logo-mini.svg" alt="logo" />-->
-               Bug Tracking System
-            </a>
-        </div>
-        <div class="navbar-menu-wrapper d-flex align-items-center">
-            <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
-                <li class="nav-item active">
-                    <a href="#" class="nav-link">
-                        <i class="mdi mdi-elevation-rise"></i>Reports</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav navbar-nav-right">
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                        <i class="mdi mdi-bell"></i>
-                        <span class="count">4</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                        <a class="dropdown-item">
-                            <p class="mb-0 font-weight-normal float-left">You have 4 new notifications
-                            </p>
-                            <span class="badge badge-pill badge-warning float-right">View all</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-success">
-                                    <i class="mdi mdi-alert-circle-outline mx-0"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-medium text-dark">Application Error</h6>
-                                <p class="font-weight-light small-text">
-                                    Just now
-                                </p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-warning">
-                                    <i class="mdi mdi-comment-text-outline mx-0"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-medium text-dark">Settings</h6>
-                                <p class="font-weight-light small-text">
-                                    Private message
-                                </p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-info">
-                                    <i class="mdi mdi-email-outline mx-0"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-medium text-dark">New user registration</h6>
-                                <p class="font-weight-light small-text">
-                                    2 days ago
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown d-none d-xl-inline-block">
-                    <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <span class="profile-text">Hello, Mudimba Moonde</span>
-                        <img class="img-xs rounded-circle" src="images/faces/face1.jpg" alt="Profile image">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                        <a class="dropdown-item p-0">
-                            <div class="d-flex border-bottom">
-                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                    <i class="mdi mdi-bookmark-plus-outline mr-0 text-gray"></i>
-                                </div>
-                                <div class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
-                                    <i class="mdi mdi-account-outline mr-0 text-gray"></i>
-                                </div>
-                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
-                                    <i class="mdi mdi-alarm-check mr-0 text-gray"></i>
-                                </div>
-                            </div>
-                        </a>
-                        <a  href="#" class="dropdown-item mt-2">
-                            Manage Accounts
-                        </a>
-                        <a href="#"  class="dropdown-item">
-                            Change Password
-                        </a>
-                        <a href="logout.php" class="dropdown-item">
-                            Logout Out
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                <span class="mdi mdi-menu"></span>
-            </button>
-        </div>
-    </nav>
+  <?php include "include/account.php" ?>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_sidebar.html -->
+        <!-- partial:partials/_s idebar.html -->
         <?php
         include "include/Leftmenu.php";
         ?>
@@ -131,33 +22,69 @@ include "include/head.php";
             <div class="content-wrapper">
                 <div class="row purchace-popup">
                 </div>
-                <?php include "include/widgets.php";?>
                 <div class="row">
                     <div class="col-12 grid-margin">
+                      <div class="jumbotron text-danger"><h1>Bug Tracking</h1></div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-12 grid-margin">
                                     <div class="card">
                                         <div class="card-body">
-                                            <div class="card-title"><h1>Manage Programs</h1></div>
+                                        <main class="container">
+                                        <div class="row">
+                                         <div class="col-md-6">
 
-                                            <!--End of Form Add School         -->
-                                            <br>
-                                            <table class="table table-bordered mce-table-striped table-hover">
-                                                <thead class="bg bg-dark text-white">
-                                                <tr>
-                                                    <th>SIN#</th>
-                                                    <th>Program Name</th>
-                                                    <th>Program Code</th>
-                                                </tr>
+                                         <div class="my-3 p-3 bg-body rounded shadow-sm">
+                                                <h2 class="border-bottom pb-2 mb-0">Issues</h2>
+                                                <!-- <span class="border-bottom pb-2 mb-0">Issues Log on the System</span> -->
+                                                <?php 
+                                                    $sqlq = "SELECT*FROM issues";
+                                                    $stmtq = $conn->prepare($sqlq);
+                                                    $stmtq->execute();
+                                                    while ($rowq = $stmtq->fetch(PDO::FETCH_OBJ)) {
+                                                        ?>
+                                                <div class="d-flex text-muted pt-3">
+                                                    <!-- <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg> -->
+                                                    <p class="pb-3 mb-0 small lh-sm border-bottom">
+                                                    <strong class="d-block text-dark"><?php echo $rowq->issueName ?> </strong>
+                                                    <?php  if($rowq->status == "active" ){?>
+                                                    <span class="badge badge-danger"><?php echo $rowq->status ?> </span>
+                                                    <?php }else{?>
+                                                        <span class="badge badge-success"><?php echo $rowq->status ?> </span>
+                                                    <?php }?>
+                                                    </p>
+                                                </div>
+                                                <?php
+                                                    } ?>
+                                             </div>
+                                        </div>
 
-                                                </thead>
-                                                <tbody id="programsDisplay">
-                                                </tbody>
-                                            </table>
-                                            <!--fade-->
-
-                                            <!--                                                -->
+                                        <div class="col-md-5">
+                                           <div class="my-3 p-3 bg-body rounded shadow-sm">
+                                                    <h2 class="border-bottom pb-2 mb-0">Assiged Issues</h2>
+                                                    <?php 
+                                                        $sqlw = "SELECT *FROM assignedissues AS ai INNER JOIN issues AS iss ON iss.issueID = ai.issueID  
+                                                        INNER JOIN users AS u ON  u.userID = ai.userID ";
+                                                        $stmtw = $conn->prepare($sqlw);
+                                                        $stmtw->execute();
+                                                        while ($roww = $stmtw->fetch(PDO::FETCH_OBJ)) {
+                                                            ?>
+                                                    <div class="d-flex text-muted pt-3">
+                                                        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                                                        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                                                        <div class="d-flex justify-content-between">
+                                                            <strong class="text-dark"><?php echo $roww->issueName ?></strong>
+                                                        </div>
+                                                        <span class="d-block">@<?php echo $roww->firstName ." ".$roww->lastName ?></span>
+                                                        <br>
+                                                        <p class="text-dark"><?php echo $roww->description; ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                        } ?>
+                                                    </div>
+                                        </div>
+                                    </main>
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +96,7 @@ include "include/head.php";
             </div>
             <!--                                            -->
         </div>
+
     </div>
     <!-- content-wrapper ends -->
     <!-- partial:partials/_footer.html -->

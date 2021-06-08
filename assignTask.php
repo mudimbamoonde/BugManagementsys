@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 <html lang="en">
 <?php
 
@@ -19,7 +19,6 @@ include "include/head.php";
         <div class="main-panel">
             <div class="content-wrapper">
             
-
                 <div class="row">
                     <div class="col-12 grid-margin">
                         <div class="card">
@@ -27,27 +26,22 @@ include "include/head.php";
                                 <div class="col-12 grid-margin">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h4 class="card-title"><h1 class="text-blue">System User</h1></h4>
+                                            <div class="card-title"><h1>Assign Tasks </h1></div>
                                             <hr>
-                                            <div id="adminUser"></div>
-                                            <!--End of Form Add School         -->
-                                            <br>
-
-                                            <table class='table table-sm table-bordered table-striped table-hover'>
-                                                <thead class='bg bg-dark text-white'>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>username</th>
-                                                    <th>Email</th>
-                                                    <th>access Level</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="ManageAdmin">
-
-                                                </tbody>
+                                            <div id="adminMessage"></div>
+                                            <table class="table">
+                                             <thead>
+                                               <tr class="bg bg-danger text-white"> 
+                                                 <th>ID</th>
+                                                 <th>Repository</th>
+                                        
+                                                 <th>Access Level</th>
+                                            
+                                               </tr>
+                                             </thead>
+                                             <tbody id="assignTask">
+                        
+                                             </tbody>
                                             </table>
 
 
@@ -61,7 +55,6 @@ include "include/head.php";
             </div>
         </div>
     </div>
-
     <!-- content-wrapper ends -->
     <!-- partial:partials/_footer.html -->
     <?php
@@ -74,6 +67,7 @@ include "include/head.php";
 <!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
+
 <?php
 include "include/javaSc.php";
 ?>
