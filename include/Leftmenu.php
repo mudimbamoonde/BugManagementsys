@@ -1,7 +1,7 @@
 <?php 
 require_once "config.php";
 ?>
-<nav class="sidebar sidebar-offcanvas sidebar-fixed-top sidebar" id="sidebar">
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item nav-profile">
             <div class="nav-link">
@@ -39,9 +39,14 @@ require_once "config.php";
             </a>
             <div class="collapse" id="paymnents">
                 <ul class="nav flex-column sub-menu">
+                <?php 
+                  if ($_SESSION["role"]=='admin') {
+                      ?>
                     <li class="nav-item">
                         <a class="nav-link" href="create_repository.php">Create Repository</a>
                     </li>
+                    <?php
+                  } ?>
                     <li class="nav-item">
                         <a class="nav-link" href="manage_repository.php">Manage Repository</a>
                     </li>
@@ -69,7 +74,9 @@ require_once "config.php";
                 </ul>
             </div>
         </li> -->
-
+        <?php 
+                  if ($_SESSION["role"]=='admin') {
+                      ?>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#m_user" aria-expanded="false" aria-controls="m_user">
                 <i class="menu-icon mdi mdi-account"></i>
@@ -90,6 +97,8 @@ require_once "config.php";
                 </ul>
             </div>
         </li>
+        <?php
+                  } ?>
 
         <li class="nav-item">
             <a class="nav-link" href="logout.php">

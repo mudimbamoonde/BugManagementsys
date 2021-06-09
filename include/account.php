@@ -11,34 +11,49 @@
         <div class="navbar-menu-wrapper d-flex align-items-center">
     
             <ul class="navbar-nav navbar-nav-right">
+               <?php
+               require_once "config.php";
+                 $owp = $conn->prepare("SELECT * FROM issues inner join repository ON repository.rid = issues.rid WHERE status=?");
+                 $owp->bindValue(1,"active");
+                 $owp->execute();
 
+                 $count = $owp->rowCount();
+               
+               ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                         <i class="mdi mdi-bell"></i>
-                        <span class="count">4</span>
+                        <span class="count"><?php echo $count ?></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                         <a class="dropdown-item">
-                            <p class="mb-0 font-weight-normal float-left">You have 4 new notifications
+                            <p class="mb-0 font-weight-normal float-left">You have <?php echo $count ?> new notifications
                             </p>
-                            <span class="badge badge-pill badge-warning float-right">View all</span>
+                           
                         </a>
                         <div class="dropdown-divider"></div>
+                        <?php 
+                        
+                        while ($rw = $owp->fetch(PDO::FETCH_OBJ)) {
+                            ?>
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
-                                <div class="preview-icon bg-success">
+                                <div class="preview-icon bg-warning">
                                     <i class="mdi mdi-alert-circle-outline mx-0"></i>
                                 </div>
                             </div>
                             <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-medium text-dark">Application Error</h6>
+                                <h6 class="preview-subject font-weight-medium text-dark"><?php echo $rw->issueName ?></h6>
                                 <p class="font-weight-light small-text">
-                                    Just now
+                                    <?php echo $rw->reponame ?>
                                 </p>
                             </div>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
+                        <?php
+                        } ?>
+                       
+                        <!-- <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <div class="preview-icon bg-warning">
                                     <i class="mdi mdi-comment-text-outline mx-0"></i>
@@ -64,12 +79,12 @@
                                     2 days ago
                                 </p>
                             </div>
-                        </a>
+                        </a> -->
                     </div>
                 </li>
                 <li class="nav-item dropdown d-none d-xl-inline-block">
                     <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <span class="profile-text">Hello, <?php echo $_SESSION["fname"] ." ". $_SESSION["lname"] ?></span>
+                        <span class="profile-text">Hi, <?php echo $_SESSION["fname"] ." ". $_SESSION["lname"] ?></span>
                         <!-- <img class="img-xs rounded-circle" src="images/faces/face1.jpg" alt="Profile image"> -->
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
