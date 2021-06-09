@@ -75,8 +75,8 @@ require_once "config.php";
             </div>
         </li> -->
         <?php 
-                  if ($_SESSION["role"]=='admin') {
-                      ?>
+           if ($_SESSION["role"]=='admin') {
+        ?>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#m_user" aria-expanded="false" aria-controls="m_user">
                 <i class="menu-icon mdi mdi-account"></i>
@@ -97,8 +97,7 @@ require_once "config.php";
                 </ul>
             </div>
         </li>
-        <?php
-                  } ?>
+        <?php } ?>
 
         <li class="nav-item">
             <a class="nav-link" href="logout.php">
