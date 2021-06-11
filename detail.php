@@ -62,13 +62,13 @@ include "include/head.php";
                                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                                                 <?php if ($ro->status == "active") { ?>
                                                                 <b><?php echo $ro->issueName ?>  <span class="badge badge-warning"><?php echo $ro->status ?></span></b> <br>
-                                                                <a href='delete.php?delete="<?php echo $ro->issueName ?>"&view=resolve' class="btn btn-sm btn-success">Resolve</a>
+                                                                <a href='delete.php?delete=<?php echo $ro->issueID ?>&view=resolved' class="btn btn-sm btn-success">Resolve</a>
                                                                 <?php
                                                                 } else {
                                                                     ?>
 
                                                                     <b><?php echo $ro->issueName ?>  <span class="badge badge-success"><?php echo $ro->status ?></span></b>
-                                                                    <a href='delete.php?delete="<?php echo $ro->issueName ?>"' class="btn btn-sm btn-danger">X</a>
+                                                                    <a href='delete.php?delete=<?php echo $ro->issueID ?>&view=deleted' class="btn btn-sm btn-danger">X</a>
                                                                 <?php } ?>
                                                                 
                                                                

@@ -20,8 +20,7 @@ include "include/head.php";
         <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper">
-                <div class="row purchace-popup">
-                </div>
+        
                 <div class="row">
                     <div class="col-12 grid-margin">
                       <div class="jumbotron text-danger"><h1>Bug Tracking</h1></div>
@@ -31,6 +30,7 @@ include "include/head.php";
                                     <div class="card">
                                         <div class="card-body">
                                         <main class="container">
+                                        
                                         <div class="row">
                                          <div class="col-md-6">
 
@@ -57,6 +57,11 @@ include "include/head.php";
                                                 <?php
                                                     } ?>
                                              </div>
+
+
+
+
+
                                         </div>
 
                                         <div class="col-md-5">

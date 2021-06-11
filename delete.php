@@ -1,16 +1,26 @@
 <?php 
-require_once "config.php";
+require_once "include/config.php";
 
 if (isset($_GET["delete"])) {
-    if(isset($_GET["resolve"])){
-        
+    if($_GET["view"]=='resolved'){
+        $chek = $conn->prepare("
+        UPDATE issues SET status=? WHERE issueID=?
+     ");
+         $chek->bindValue(1, $_GET["view"]);
+         $chek->bindValue(2, trim($_GET["delete"]),PDO::PARAM_INT);
+         if($chek->execute()){
+             header("location:index.php");
+         }
+    }else if($_GET["view"]=='deleted'){
+        $chek = $conn->prepare("
+        DELETE FROM issues  WHERE issueID=?
+     ");
+        //  $chek->bindValue(1, $_GET["view"]);
+         $chek->bindValue(1, trim($_GET["delete"]),PDO::PARAM_INT);
+         if($chek->execute()){
+             header("location:index.php");
+         }
     }
-    $chek = $conn->prepare("
-DELETE FROM issues WHERE issueName=?
-");
-    $chek->bindValue(1, $_GET["delete"]);
-    if($chek->execute()){
-        header("location:detail.php?repid=1&state=issues");
-    }
+   
 
 }
